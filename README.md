@@ -1,27 +1,22 @@
-# Allo Inventory Reservation System
+# Inventory Reservation System
 
-A Next.js application for reserving inventory across multiple warehouses.
+## Live Demo
+https://allo-inventory-swart.vercel.app
+
+## GitHub Repository
+https://github.com/SomavarapuLavanya/allo-inventory
 
 ## Tech Stack
-
-- Next.js App Router
+- Next.js
 - TypeScript
 - Prisma
-- Supabase PostgreSQL
-- Tailwind CSS
+- PostgreSQL
+- Supabase
+- Vercel
 
 ## Features
-
-- Product listing with warehouse stock
-- Temporary reservation system
-- Confirm purchase
-- Cancel reservation
-- Reservation expiry countdown
-- 409 error for insufficient stock
-- 410 error for expired reservations
-
-## How to Run Locally
-
-```bash
-npm install
-npm run dev
+- Inventory reservation
+- Reservation confirmation
+- Reservation cancellation
+- Expiry cleanup
+- Multi warehouse stock handling
