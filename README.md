@@ -20,3 +20,16 @@ https://github.com/SomavarapuLavanya/allo-inventory
 - Reservation cancellation
 - Expiry cleanup
 - Multi warehouse stock handling
+
+## Setup Instructions
+
+```bash
+git clone https://github.com/SomavarapuLavanya/allo-inventory.git
+
+cd allo-inventory
+
+npm install
+
+npx prisma generate
+
+npm run dev
