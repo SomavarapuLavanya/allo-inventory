@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-
+import type { Prisma } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
@@ -11,7 +11,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    const reservation = await prisma.$transaction(async (tx) => {
+    const reservation = await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       const stock = await tx.stock.findUnique({
         where: {
           productId_warehouseId: { productId, warehouseId },

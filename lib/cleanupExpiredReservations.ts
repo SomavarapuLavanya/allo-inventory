@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-
+import type { Prisma } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function cleanupExpiredReservations() {
@@ -13,7 +13,7 @@ export async function cleanupExpiredReservations() {
   });
 
   for (const reservation of expired) {
-    await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       await tx.stock.update({
         where: {
           productId_warehouseId: {

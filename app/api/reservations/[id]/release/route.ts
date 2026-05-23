@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-
+import type { Prisma } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function POST(
@@ -21,7 +21,7 @@ export async function POST(
     return NextResponse.json(reservation);
   }
 
-  const updated = await prisma.$transaction(async (tx) => {
+  const updated = await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
     await tx.stock.update({
       where: {
         productId_warehouseId: {

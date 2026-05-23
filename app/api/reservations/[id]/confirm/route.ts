@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-
+import type { Prisma } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function POST(
@@ -31,31 +31,31 @@ export async function POST(
     );
   }
 
-  const updated = await prisma.$transaction(async (tx) => {
-    await tx.stock.update({
-      where: {
-        productId_warehouseId: {
-          productId: reservation.productId,
-          warehouseId: reservation.warehouseId,
-        },
+  const updated = await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
+  await tx.stock.update({
+    where: {
+      productId_warehouseId: {
+        productId: reservation.productId,
+        warehouseId: reservation.warehouseId,
       },
-      data: {
-        totalUnits: {
-          decrement: reservation.quantity,
-        },
-        reservedUnits: {
-          decrement: reservation.quantity,
-        },
+    },
+    data: {
+      totalUnits: {
+        decrement: reservation.quantity,
       },
-    });
-
-    return tx.reservation.update({
-      where: { id },
-      data: {
-        status: "confirmed",
+      reservedUnits: {
+        decrement: reservation.quantity,
       },
-    });
+    },
   });
+
+  return tx.reservation.update({
+    where: { id },
+    data: {
+      status: "confirmed",
+    },
+  });
+});
 
   return NextResponse.json(updated);
 }
